@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<title>Jangan Marah Dulu 🌷</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    width:100%;
+    overflow-x:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#74cfff,#bdeaff,#f4fcff);
+    padding:20px;
+    position:relative;
+}
+
+/* INTRO */
+.intro{
+    position:fixed;
+    inset:0;
+    background:#111;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    z-index:10;
+    animation:hilang 4s forwards;
+}
+
+@keyframes hilang{
+    0%{opacity:1;}
+    80%{opacity:1;}
+    100%{opacity:0;visibility:hidden;}
+}
+
+/* CARD */
+.card{
+    width:95%;
+    max-width:420px;
+    background:rgba(255,255,255,0.28);
+    backdrop-filter:blur(16px);
+    border-radius:25px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 10px 40px rgba(80,150,255,0.15);
+    animation:naik 1s ease;
+}
+
+@keyframes naik{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+h1{
+    color:#4da6ff;
+    margin-bottom:15px;
+    font-size:22px;
+}
+
+p{
+    color:#555;
+    line-height:1.7;
+    font-size:14px;
+}
+
+.foto{
+    width:110px;
+    height:110px;
+    border-radius:20px;
+    object-fit:cover;
+    margin-top:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+#typing{
+    margin-top:20px;
+    color:#4da6ff;
+    min-height:70px;
+    line-height:1.6;
+    font-weight:600;
+    font-size:14px;
+}
+
+/* BUTTON */
+.buttons{
+    margin-top:20px;
+    position:relative;
+    height:140px;
+}
+
+button{
+    border:none;
+    padding:12px 18px;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.2s;
+    max-width:100%;
+}
+
+.maafin{
+    background:#59b7ff;
+    color:white;
+    box-shadow:0 5px 15px rgba(89,183,255,0.3);
+}
+
+.gamau{
+    background:white;
+    color:#59b7ff;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    top:60px;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+/* FINAL */
+.final{
+    margin-top:20px;
+    color:#4da6ff;
+    font-weight:600;
+    opacity:0;
+    transition:1s;
+}
+
+/* CHAT */
+.chatBox{
+    margin-top:30px;
+}
+
+.chatBox h3{
+    color:#4da6ff;
+    margin-bottom:10px;
+    font-size:15px;
+}
+
+textarea{
+    width:100%;
+    height:100px;
+    border:none;
+    outline:none;
+    border-radius:15px;
+    padding:12px;
+    resize:none;
+    font-size:13px;
+    background:rgba(255,255,255,0.7);
+    color:#444;
+}
+
+/* HEART */
+.heart{
+    position:fixed;
+    top:-20px;
+    color:#7ec8ff;
+    animation:fall linear forwards;
+    pointer-events:none;
+    z-index:1;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" loop>
+    <source src="sayangg.mp3" type="audio/mpeg">
+</audio>
+
+<div class="intro">
+    eh bentar... baca dulu yaa sayangg 😔
+</div>
+
+<div class="card">
+
+    <h1>Hai Bayii mungill kikyyy 🤍</h1>
+
+    <p>
+        kikyy tauu kikyy buatt sayangg jadi badmood...
+        dan mungkinn kikyy buatt sayangg capeee jugaaa..
+        Maaff yaa 😔
+    </p>
+
+    <img src="sayang.png" class="foto">
+
+    <div id="typing"></div>
+
+    <div class="buttons">
+
+        <button class="maafin" onclick="maafin()">
+            iya aku maafin 🤍
+        </button>
+
+        <button class="gamau" id="gamau">
+            gamau maafin 😠
+        </button>
+
+    </div>
+
+    <div class="final" id="finalText">
+        maacii yaa udaaa dimaafinn 🤍
+    </div>
+
+    <div class="chatBox">
+
+        <h3>bayii mungill kikyyy mauu apaa insyaallah kikyyy turutinn🥺</h3>
+
+        <textarea id="pesan" placeholder="ketik disini..."></textarea>
+
+        <button class="maafin" onclick="kirimWA()">
+            Kirim ke WhatsApp 💌
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+window.addEventListener("click", () => {
+    document.getElementById("bgm").play();
+});
+
+/* typing */
+const text = [
+"kikyy mintaa maaf karena buatt sayangg jadi badmood 🥺🤏🏻",
+"kikyy jugaa mintaa maaff karena perilaku kikyy tadii sayang jadi badmood dsn capee..🥺",
+"kikyy tidaa akann lakuinn ituu lagii, kikyy bakal liatt kondisii sayangg trusss🥺🤏🏻maaff yaa karenaa kikyy ssyangg jadi capee 🥺🤏🏻 maacii yaa udaa sabarr hadapin bayii besar ssyangg inii ehee"
+];
+
+let line = 0;
+let char = 0;
+
+function ketik(){
+    if(line < text.length){
+        if(char < text[line].length){
+            document.getElementById("typing").innerHTML += text[line].charAt(char);
+            char++;
+            setTimeout(ketik,50);
+        }else{
+            document.getElementById("typing").innerHTML += "<br>";
+            line++;
+            char = 0;
+            setTimeout(ketik,700);
+        }
+    }
+}
+
+setTimeout(ketik,3500);
+
+/* tombol kabur */
+const gamau = document.getElementById("gamau");
+
+gamau.addEventListener("mouseenter", kabur);
+gamau.addEventListener("touchstart", kabur);
+
+function kabur(){
+    const maxX = window.innerWidth - gamau.offsetWidth - 20;
+    const maxY = window.innerHeight - gamau.offsetHeight - 20;
+
+    gamau.style.position = "fixed";
+    gamau.style.left = Math.random() * maxX + "px";
+    gamau.style.top = Math.random() * maxY + "px";
+}
+
+/* maafin */
+function maafin(){
+
+    navigator.vibrate(100);
+
+    document.body.style.background =
+    "linear-gradient(135deg,#74cfff,#bdeaff,#f4fcff)";
+
+    document.getElementById("finalText").style.opacity = "1";
+
+    for(let i=0;i<60;i++){
+        setTimeout(heart,i*80);
+    }
+
+    alert("maacii yaa bayii mungill kikyyy 🤍");
+}
+
+/* hati */
+function heart(){
+    const love = document.createElement("div");
+    love.classList.add("heart");
+    love.innerHTML = "❤";
+
+    love.style.left = Math.random() * 100 + "vw";
+    love.style.fontSize = (Math.random()*20+15)+"px";
+    love.style.animationDuration = (Math.random()*3+2)+"s";
+
+    document.body.appendChild(love);
+
+    setTimeout(()=>love.remove(),5000);
+}
+
+setInterval(heart,300);
+
+/* WA */
+function kirimWA(){
+
+    const pesan = document.getElementById("pesan").value;
+
+    if(pesan.trim() === ""){
+        alert("isi dulu ya 😔");
+        return;
+    }
+
+    const nomor = "6287710591220";
+
+    const textWA =
+`permintaan bayi mungill kikyyyy akan di kabul kan'
+
+${pesan}`;
+
+    window.open(
+        `https://wa.me/${nomor}?text=${encodeURIComponent(textWA)}`,
+        "_blank"
+    );
+}
+
+</script>
+
+</body>
+</html>
